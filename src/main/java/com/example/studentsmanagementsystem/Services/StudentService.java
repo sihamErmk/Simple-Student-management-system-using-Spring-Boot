@@ -8,31 +8,11 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Service
-public class StudentService {
-
-    public List<Student> findAllStudents(){
-
-        return List.of(
-                new Student(
-                        "Siham",
-                        "Ereh",
-                        "sereh@gmil.com",
-                        LocalDate.of(2004,1,23),
-                        20
-                ),
-                new Student(
-                        "Eren",
-                        "Yeager ",
-                        "yeager@gmil.com",
-                        LocalDate.now(),
-                        23
-                )
-
-
-
-
-
-        );
-    }
+public interface StudentService {
+ Student save(Student student);
+List<Student> findAllStudents();
+ Student findEmail(String email);
+ Student updateStudent(Student student);
+ void deleteStudent(String email);
 
 }
