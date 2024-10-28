@@ -3,6 +3,7 @@ package com.example.studentsmanagementsystem.Controller;
 import com.example.studentsmanagementsystem.Services.InMemoryStudentService;
 import com.example.studentsmanagementsystem.Services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
@@ -15,8 +16,8 @@ public class StudentController {
 
     private final StudentService studentService ;
 
-    @Autowired //inject the studentservice into student controller
-    public StudentController(StudentService studentService){
+    //@Autowired //inject the studentservice into student controller
+    public StudentController(@Qualifier("DBStudentService") StudentService studentService){
         this.studentService = studentService;
 
     }

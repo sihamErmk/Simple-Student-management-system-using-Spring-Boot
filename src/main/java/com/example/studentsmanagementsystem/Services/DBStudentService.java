@@ -2,13 +2,17 @@ package com.example.studentsmanagementsystem.Services;
 
 import com.example.studentsmanagementsystem.Controller.Student;
 import com.example.studentsmanagementsystem.Repository.StudentRepository;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Primary
+@Service
 public class DBStudentService implements StudentService{
     private final StudentRepository studentRepository;
 
     public DBStudentService(StudentRepository studentRepository) {
+
         this.studentRepository = studentRepository;
     }
 
@@ -25,7 +29,7 @@ public class DBStudentService implements StudentService{
     @Override
     public Student findEmail(String email) {
 
-        return studentRepository.findEmail(email);
+        return studentRepository.findByEmail(email);
     }
 
     @Override

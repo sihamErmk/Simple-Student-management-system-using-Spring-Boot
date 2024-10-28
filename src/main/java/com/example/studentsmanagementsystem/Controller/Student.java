@@ -1,25 +1,41 @@
 package com.example.studentsmanagementsystem.Controller;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
+import java.time.Period;
 
 @Entity
-@Table(name="student")
+@Table(name = "student")
 public class Student {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String Fname;
-    private  String Lname;
-    @Column(unique = true)
-    private  String Email;
-    private  String DateOfBirth;
-    @Transient
-    private  int age;
+    private String firstName;
+    private String lastName;
 
+    @Column(unique = true)
+    private String email;
+
+    private LocalDate dateOfBirth;
+
+    @Transient
+    private int age;
+
+    // Constructor with all fields except ID (for saving new students)
+    public Student(String firstName, String lastName, String email, LocalDate dateOfBirth, int age) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.dateOfBirth = dateOfBirth;
+        this.age = age;
+    }
+
+    // Default constructor (required by JPA)
+    public Student() {}
+
+    // Getter and Setter for ID
     public Integer getId() {
         return id;
     }
@@ -28,50 +44,41 @@ public class Student {
         this.id = id;
     }
 
-
-    public Student(String fname, String lname, String email, LocalDate dateOfBirth, int age){
-        this.Fname = fname;
-        this.Lname = lname;
-        this.Email = email;
-        this.DateOfBirth = String.valueOf(dateOfBirth);
-        this.age=age;
-    }
-    public Student(){
-
+    // Getters and Setters for fields
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getFname() {
-        return Fname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setFname(String fname) {
-        Fname = fname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public String getLname() {
-        return Lname;
-    }
-
-    public void setLname(String lname) {
-        Lname = lname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
-    public String getDateOfBirth(){
-        return DateOfBirth;
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
     }
-    public  void setDateOfBirth(String dateOfBirth){
-        DateOfBirth = dateOfBirth;
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public int getAge() {
-        return age;
+        return Period.between(dateOfBirth,LocalDate.now()).getYears();
     }
 
     public void setAge(int age) {
