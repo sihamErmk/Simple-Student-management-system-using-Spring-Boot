@@ -24,7 +24,8 @@ public class DBStudentService implements StudentService{
 
     @Override
     public Student findEmail(String email) {
-        return null;
+
+        return studentRepository.findEmail(email);
     }
 
     @Override
@@ -34,6 +35,7 @@ public class DBStudentService implements StudentService{
 
     @Override
     public void deleteStudent(String email) {
+        studentRepository.deleteByEmail( email);
 
     }
 }
